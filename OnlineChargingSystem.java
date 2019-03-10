@@ -228,6 +228,10 @@ public class OnlineChargingSystem {
         		UserEquipment ue = UeArr.get(i);
         		double withdrewGU = ue.callBack();
         		
+        		// count return GU error messages
+        		ue.countRequestTimes += 1;
+        		ue.countFailedRequestTimes += 1;
+        		
         		calledBackGU += withdrewGU;
         	}
         	
@@ -252,6 +256,10 @@ public class OnlineChargingSystem {
     	for(int i = 0; i < UeArr.size(); i++) {
     		UserEquipment ue = UeArr.get(i);
     		int ID = ue.getUeID();
+    		
+    		// count successful allocating GU request times
+    		ue.countRequestTimes += 1;
+    		ue.countSuccessfulRequestTimes += 1;
     		
     		if (ID != UEID) {
     			double reservedGU = (double)reservedGUs.get(ID);
