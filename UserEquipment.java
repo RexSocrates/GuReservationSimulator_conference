@@ -141,8 +141,8 @@ public class UserEquipment {
 //    	double successfulTimes = this.numberOfSessions - this.sessionFailedTimes;
 //    	return successfulTimes / this.numberOfSessions;
     	
-    	double successRate = (this.countRequestTimes - this.countFailedRequestTimes) / this.countRequestTimes;
-//    	double successRate = this.countSuccessfulRequestTimes / this.countRequestTimes;
+//    	double successRate = (this.countRequestTimes - this.countFailedRequestTimes) / this.countRequestTimes;
+    	double successRate = this.countSuccessfulRequestTimes / this.countRequestTimes;
     	return successRate;
     }
     
@@ -247,7 +247,7 @@ public class UserEquipment {
     public void askNewGU(double sessionTotalGU, double timePeriod) {
     	// send online charging request to ask new GU
     	boolean dataAllowanceNotEnough = this.sendOnlineChargingRequestSessionStart(timePeriod);
-    	System.out.println("Ask new GU : data allowance not enough : " + dataAllowanceNotEnough);
+//    	System.out.println("Ask new GU : data allowance not enough : " + dataAllowanceNotEnough);
         
         if(dataAllowanceNotEnough) {
         	// when the remaining data allowance is not enough, session ends
@@ -323,7 +323,7 @@ public class UserEquipment {
     		// the remaining GU in the device is not enough so keep asking new GU until the allocated GU is enough
     		
     		dataAllowanceNotEnough = this.sendOnlineChargingRequestSessionContinue(reservationCount++);
-    		System.out.println("consume GU data allowance not enough : " + dataAllowanceNotEnough);
+//    		System.out.println("consume GU data allowance not enough : " + dataAllowanceNotEnough);
     		if(dataAllowanceNotEnough) {
     			// if the remaining GU is not enough then break the loop
     			break;
