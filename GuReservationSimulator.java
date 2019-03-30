@@ -39,10 +39,10 @@ public class GuReservationSimulator {
      */
     public static void main(String[] args) throws FileNotFoundException {
     	getRandomSampleIndex();
-        System.out.print("Enter the number of devices : ");
-        int numOfDevices = input.nextInt();
-//        int numOfDevices = 7;
-        System.out.println("");
+//        System.out.print("Enter the number of devices : ");
+//        int numOfDevices = input.nextInt();
+        int numOfDevices = 7;
+//        System.out.println("");
         cellIDs = new int[numOfDevices];
         
         // print reservation scheme options
@@ -52,15 +52,15 @@ public class GuReservationSimulator {
         		"Inventory-based Reservation Scheme"
         };
         
-        for(int i = 0; i < reservationSchemes.length; i++) {
-        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-        }
-        System.out.print("Choose the reservation scheme : ");
-        int option = input.nextInt();
-//        int option = 2;
+//        for(int i = 0; i < reservationSchemes.length; i++) {
+//        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+//        }
+//        System.out.print("Choose the reservation scheme : ");
+//        int option = input.nextInt();
+        int option = 3;
         
         
-        System.out.println("");
+//        System.out.println("");
         
         // configure the experiment
         double totalDataAllowance = dataAllowanceSetting(numOfDevices);
@@ -199,24 +199,25 @@ public class GuReservationSimulator {
     	
     	if(option == 3) {
     		// enter some variable that IRS needs
-    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
-        	dataCollectionPeriods = input.nextDouble();
+//    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
+//        	dataCollectionPeriods = input.nextDouble();
         	
         	// read period length file
-    		/*
-        	String periodFileName = "periods.txt";
+    		
+        	String periodFileName = "cycleTime.txt";
         	File periodFile = new File(periodFileName);
         	Scanner periodFileInput = new Scanner(periodFile);
         	
         	dataCollectionPeriods = periodFileInput.nextDouble();
+        	periodFileInput.close();
         	
         	// write period file
         	PrintWriter pw = new PrintWriter(periodFileName);
         	double newPeriodLength = dataCollectionPeriods + 1;
         	pw.print(newPeriodLength);
         	pw.close();
-        	System.out.println("");
-        	*/
+//        	System.out.println("");
+        	
         	
         	
 //        	System.out.print("Enter report interval(hour) : ");
