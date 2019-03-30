@@ -229,9 +229,7 @@ public class OnlineChargingSystem {
         		double withdrewGU = ue.callBack();
         		
         		// count return GU error messages
-        		ue.interaction += 1;
-//        		ue.countRequestTimes += 1;
-//        		ue.countFailedRequestTimes += 1;
+        		ue.countRequestTimes += 1;
         		
         		calledBackGU += withdrewGU;
         	}
