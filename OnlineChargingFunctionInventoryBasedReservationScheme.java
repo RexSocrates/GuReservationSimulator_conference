@@ -82,7 +82,7 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 		// store remaining GU
 		this.remainingGUsHashtable.put(ueID, remainingGU);
 		// store optimal GU
-		this.optimalGUsHashtable.put(ueID, optimalGU);
+		this.optimalGUsHashtable.put(ueID, avgDataUsage);
 		// update latest reporting time
 		this.reportingTime.put(ueID, currentTimePeriod);
 		
