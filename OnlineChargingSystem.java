@@ -229,8 +229,9 @@ public class OnlineChargingSystem {
         		double withdrewGU = ue.callBack();
         		
         		// count return GU error messages
-        		ue.countRequestTimes += 1;
-        		ue.countFailedRequestTimes += 1;
+        		ue.interaction += 1;
+//        		ue.countRequestTimes += 1;
+//        		ue.countFailedRequestTimes += 1;
         		
         		calledBackGU += withdrewGU;
         	}
@@ -245,7 +246,7 @@ public class OnlineChargingSystem {
         		callBack = false;
         	}
         	
-        	System.out.println("Called back RD : " + remainingDataAllowance);
+//        	System.out.println("Called back RD : " + remainingDataAllowance);
     	}
     }
     
@@ -258,8 +259,9 @@ public class OnlineChargingSystem {
     		int ID = ue.getUeID();
     		
     		// count successful allocating GU request times
-    		ue.countRequestTimes += 1;
-    		ue.countSuccessfulRequestTimes += 1;
+    		ue.interaction += 1;
+//    		ue.countRequestTimes += 1;
+//    		ue.countFailedRequestTimes += 1;
     		
     		if (ID != UEID) {
     			double reservedGU = (double)reservedGUs.get(ID);
