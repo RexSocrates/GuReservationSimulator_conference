@@ -138,12 +138,12 @@ public class UserEquipment {
     }
     
     public double getSuccessfulRate() {
-//    	double successfulTimes = this.numberOfSessions - this.sessionFailedTimes;
-//    	return successfulTimes / this.numberOfSessions;
+    	double successfulTimes = this.numberOfSessions - this.sessionFailedTimes;
+    	return successfulTimes / this.numberOfSessions;
     	
 //    	double successRate = (this.countRequestTimes - this.countFailedRequestTimes) / this.countRequestTimes;
-    	double successRate = this.countSuccessfulRequestTimes / this.countRequestTimes;
-    	return successRate;
+//    	double successRate = this.countSuccessfulRequestTimes / this.countRequestTimes;
+//    	return successRate;
     }
     
     public DailyUsage getDailyUsage() {
