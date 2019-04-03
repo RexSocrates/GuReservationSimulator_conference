@@ -16,9 +16,9 @@ public class UserEquipment {
     // record the current time
     private double currentTimePeriod = 1;
     // count the sessions include completed and failed sessions
-    private double numberOfSessions = 0;
+    double numberOfSessions = 0;
     // record the times that session fails
-    private int sessionFailedTimes = 0;
+    double sessionFailedTimes = 0;
     // record the times that UE interact with OCS
     double interaction = 0;
     
@@ -113,11 +113,11 @@ public class UserEquipment {
         this.producedSignals = producedSignals;
     }
     
-    public int getSessionFailedTimes() {
+    public double getSessionFailedTimes() {
     	return this.sessionFailedTimes;
     }
     
-    public void setSessionFailedTimes(int sessionFailedTimes) {
+    public void setSessionFailedTimes(double sessionFailedTimes) {
     	this.sessionFailedTimes = sessionFailedTimes;
     }
     
