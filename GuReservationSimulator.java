@@ -32,6 +32,7 @@ public class GuReservationSimulator {
     static double dataCollectionPeriods = 1;
     static int[] cellIDs;
     static String sampleIndexStr = "sample_";
+    static double usageWeight = 23;
 
     /**
      * @param args the command line arguments
@@ -316,7 +317,7 @@ public class GuReservationSimulator {
 					String[] tupleArr = tuple.split(",");
 					
 					int ueID = Integer.parseInt(tupleArr[0]);
-					double internetUsage = Math.ceil(Double.parseDouble(tupleArr[1]));
+					double internetUsage = Math.ceil(Double.parseDouble(tupleArr[1])) * usageWeight;
 					
 					int time = (day - 1) * 24 + hour;
 					
@@ -375,8 +376,8 @@ public class GuReservationSimulator {
 			String[] tupleArr = tuple.split(",");
 			
 			int ueID = Integer.parseInt(tupleArr[0]);
-			double totalInternetUsage = Double.parseDouble(tupleArr[1]);
-			double dataRate = Double.parseDouble(tupleArr[2]);
+			double totalInternetUsage = Double.parseDouble(tupleArr[1]) * usageWeight;
+			double dataRate = Double.parseDouble(tupleArr[2]) * usageWeight;
 			
 			for(int i = 0; i < ueIDs.length; i++) {
 				int currentUeID = ueIDs[i];
