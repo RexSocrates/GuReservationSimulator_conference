@@ -40,6 +40,7 @@ public class GuReservationSimulator {
      */
     public static void main(String[] args) throws FileNotFoundException {
     	getRandomSampleIndex();
+    	getUsageWeight();
         System.out.print("Enter the number of devices : ");
         int numOfDevices = input.nextInt();
 //        int numOfDevices = 7;
@@ -127,6 +128,19 @@ public class GuReservationSimulator {
         
         writeExperimentResult(numOfDevices, reservationSchemes[option - 1], totalDataAllowance, defaultGU);
     }
+    
+    private static void getUsageWeight() throws FileNotFoundException {
+		File weightFile = new File("usageWeight.txt");
+		Scanner weigthInput = new Scanner(weightFile);
+		double weight = weigthInput.nextDouble();
+		
+		usageWeight = weight;
+		weigthInput.close();
+		
+		PrintWriter pw = new PrintWriter("usageWeight.txt");
+		pw.println(++weight);
+		pw.close();
+	}
 
 	private static void getRandomSampleIndex() throws FileNotFoundException {
 		File sampleIndexFile = new File("sampleIndex.txt");
