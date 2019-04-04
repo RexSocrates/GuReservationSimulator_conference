@@ -134,7 +134,20 @@ public class UserEquipment {
     }
     
     public double getPeriodicalDataUsage() {
-    	return this.periodicalDataUsage;
+    	// sum previously allocated GU
+    	double allocatedGU = 0;
+    	for(int index = 0; index < periodAllocatedRecords.size(); index++) {
+    		SinglePeriodAllocatedGUs singlePeriodRecord = periodAllocatedRecords.get(index);
+    		allocatedGU += singlePeriodRecord.getSumOfGUs();
+    	}
+    	
+    	// subtract remaining GU
+    	double consumedGU = allocatedGU - this.getCurrentGU();
+    	
+    	double dataRate = consumedGU / periodAllocatedRecords.size();
+    	this.setPeriodicalDataUsage(dataRate);
+    	
+    	return dataRate;
     }
     
     public double getSuccessfulRate() {
