@@ -140,6 +140,11 @@ public class GuReservationSimulator {
 		}else {
 			sampleIndexStr += sampleIndex + "_";
 		}
+		sampleIndexFileInput.close();
+		
+		PrintWriter pw = new PrintWriter("sampleIndex.txt");
+		pw.println(++sampleIndex);
+		pw.close();
 	}
 
 	private static void initializeUserEquipments(int numOfDevices, int option) throws FileNotFoundException {
