@@ -32,13 +32,14 @@ public class GuReservationSimulator {
     static double dataCollectionPeriods = 1;
     static int[] cellIDs;
     static String sampleIndexStr = "sample_";
+    static ArrayList<ExpResult> resultArr = new ArrayList<ExpResult>();
 
     
     public static void main(String[] args) throws FileNotFoundException {
-    	int experimentTimes = 100;
-    	double[] interactionArr = new double[experimentTimes];
-    	double[] signalsArr = new double[experimentTimes];
-    	double[] successRateArr = new double[experimentTimes];
+    	int experimentTimes = 1;
+//    	double[] interactionArr = new double[experimentTimes];
+//    	double[] signalsArr = new double[experimentTimes];
+//    	double[] successRateArr = new double[experimentTimes];
     	
     	// print reservation scheme options
         String[] reservationSchemes = {
@@ -48,7 +49,7 @@ public class GuReservationSimulator {
         };
     	
     	for(int  expSerial = 0; expSerial < experimentTimes; expSerial++) {
-    		System.out.println("Exp serial : " + expSerial);
+//    		System.out.println("Exp serial : " + expSerial);
     		
     		getRandomSampleIndex();
             System.out.print("Enter the number of devices : ");
@@ -110,7 +111,7 @@ public class GuReservationSimulator {
           		ue.completeSession(consumedGU, timePeriod);
           	}
               
-              System.out.printf("Remaining data allowance : %10.2f\n", OCS.getRemainingDataAllowance());
+//              System.out.printf("Remaining data allowance : %10.2f\n", OCS.getRemainingDataAllowance());
               
               timePeriod += 1;
           }
@@ -142,9 +143,9 @@ public class GuReservationSimulator {
 		}
 		sampleIndexFileInput.close();
 		
-		PrintWriter pw = new PrintWriter("sampleIndex.txt");
-		pw.println(++sampleIndex);
-		pw.close();
+//		PrintWriter pw = new PrintWriter("sampleIndex.txt");
+//		pw.println(++sampleIndex);
+//		pw.close();
 	}
 
 	private static void initializeUserEquipments(int numOfDevices, int option) throws FileNotFoundException {

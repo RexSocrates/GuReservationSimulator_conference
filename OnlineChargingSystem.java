@@ -134,7 +134,7 @@ public class OnlineChargingSystem {
         // online charging response, signals + 1
         numOfSignals = (double)hashtable.get("numOfSignals") + 1;
         hashtable.put("numOfSignals", numOfSignals);
-        System.out.printf("Num of signals : %5.0f\n", numOfSignals);
+//        System.out.printf("Num of signals : %5.0f\n", numOfSignals);
         
         return hashtable;
     }

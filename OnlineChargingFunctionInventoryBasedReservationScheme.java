@@ -82,7 +82,7 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 		// store remaining GU
 		this.remainingGUsHashtable.put(ueID, remainingGU);
 		// store optimal GU
-		this.optimalGUsHashtable.put(ueID, avgDataUsage);
+		this.optimalGUsHashtable.put(ueID, optimalGU);
 		// update latest reporting time
 		this.reportingTime.put(ueID, currentTimePeriod);
 		
@@ -160,13 +160,13 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 		// check if the remaining GU is in the hash table
 		if(this.remainingGUsHashtable.containsKey(ueID)) {
 			remainingGU = (double)this.remainingGUsHashtable.get(ueID);
-			System.out.printf("Remaining GU : %f in device UE ID : %d\n", remainingGU, ueID);
+//			System.out.printf("Remaining GU : %f in device UE ID : %d\n", remainingGU, ueID);
 			
 			// compute the EGU
 			
 			double completeCycleExpectedGU = this.getCompleteCycleExpectedGU(ueID);
-			System.out.println("Complete cycle expected GU : " + completeCycleExpectedGU);
-			System.out.println("Remaining GU : " + remainingGU);
+//			System.out.println("Complete cycle expected GU : " + completeCycleExpectedGU);
+//			System.out.println("Remaining GU : " + remainingGU);
 			if(completeCycleExpectedGU - remainingGU >= 0) {
 				egu = completeCycleExpectedGU - remainingGU;
 			}
@@ -215,7 +215,7 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 		
 		// 計算其他裝置未來的 GU 需求
 		double sumOfEGUs = this.getSumOfEguAndGuOf(ueID);
-		System.out.println("SUM EGU : " + sumOfEGUs);
+//		System.out.println("SUM EGU : " + sumOfEGUs);
 		
 		// 計算實際應該分配給裝置 i 的 GU
 //		double insufficientGU = Math.floor(optimalGuForUe / sumOfEGUs * remainingDataAllowance);
@@ -248,8 +248,8 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 			}
 			
 			insufficientGUs.put(ID, reservedGU);
-			System.out.println("Optimal GU : " + currentOptimalGU);
-			System.out.printf("Surplus GU for ue ID : %d, GU : %f\n", ID, reservedGU);
+//			System.out.println("Optimal GU : " + currentOptimalGU);
+//			System.out.printf("Surplus GU for ue ID : %d, GU : %f\n", ID, reservedGU);
 			
 			this.lastReservationTime.put(ID, timePeriod);
 			this.lastReservedGU.put(ID, reservedGU);

@@ -144,7 +144,13 @@ public class UserEquipment {
     	// subtract remaining GU
     	double consumedGU = allocatedGU - this.getCurrentGU();
     	
-    	double dataRate = consumedGU / periodAllocatedRecords.size();
+    	double dataRate = 0;
+    	if(periodAllocatedRecords.size() > 0) {
+    		dataRate = consumedGU / periodAllocatedRecords.size();    		
+    	}else {
+    		// average data usage per hour in dataset
+    		dataRate = 700;
+    	}
     	this.setPeriodicalDataUsage(dataRate);
     	
     	return dataRate;
@@ -207,7 +213,7 @@ public class UserEquipment {
         	
         	// add the content of current status report
         	hashtable.put("ueID", (double)this.ueID);
-        	hashtable.put("avgDataRate", this.periodicalDataUsage);
+        	hashtable.put("avgDataRate", this.getPeriodicalDataUsage());
         	hashtable.put("totalDemand", this.totalDemand);
         	hashtable.put("remainingGU", this.currentGU);
         	
