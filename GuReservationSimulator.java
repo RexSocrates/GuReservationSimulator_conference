@@ -510,7 +510,7 @@ public class GuReservationSimulator {
 //        defaultGU = input.nextDouble();
 //        System.out.println("");
     	
-    	defaultGU = 100;
+    	defaultGU = 1000;
         
 //        System.out.print("Enter C : ");
 //        double c = input.nextDouble();
