@@ -339,7 +339,12 @@ public class OnlineChargingFunctionInventoryBasedReservationScheme extends Onlin
 		this.estimatedTotalDemandHashtable.put(ueID, totalDemand);
 		this.dataUsageHashtable.put(ueID, dataRate);
 		
-		double optimalGU = this.getOptimalGU(totalDemand, dataRate);
+		double optimalGU = 0;
+		if(dataRate == -1) {
+			optimalGU = 700;
+		}else {
+			optimalGU = this.getOptimalGU(totalDemand, dataRate);			
+		}
 		this.optimalGUsHashtable.put(ueID, optimalGU);
 	}
 

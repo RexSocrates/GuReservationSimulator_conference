@@ -149,7 +149,7 @@ public class UserEquipment {
     		dataRate = consumedGU / periodAllocatedRecords.size();    		
     	}else {
     		// average data usage per hour in dataset
-    		dataRate = 700;
+    		dataRate = -1;
     	}
     	this.setPeriodicalDataUsage(dataRate);
     	
