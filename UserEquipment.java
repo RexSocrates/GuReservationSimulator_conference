@@ -136,21 +136,31 @@ public class UserEquipment {
     public double getPeriodicalDataUsage() {
     	// sum previously allocated GU
     	double allocatedGU = 0;
-    	for(int index = 0; index < periodAllocatedRecords.size(); index++) {
+    	int cycleTimeCounter = 0;
+    	for(int index = periodAllocatedRecords.size() - 1; index >= 0; index--) {
     		SinglePeriodAllocatedGUs singlePeriodRecord = periodAllocatedRecords.get(index);
     		allocatedGU += singlePeriodRecord.getSumOfGUs();
+    		
+    		if(++cycleTimeCounter > reportInterval) {
+    			break;
+    		}
     	}
     	
-    	// subtract remaining GU
-    	double consumedGU = allocatedGU - this.getCurrentGU();
     	
     	double dataRate = 0;
-    	if(periodAllocatedRecords.size() > 0) {
-    		dataRate = consumedGU / periodAllocatedRecords.size();    		
+    	if(allocatedGU > 0) {
+    		// subtract remaining GU
+    		double consumedGU = allocatedGU - this.getCurrentGU();
+    		
+    		if(reportInterval > periodAllocatedRecords.size()) {
+    			dataRate = consumedGU / periodAllocatedRecords.size();
+    		}else {
+    			dataRate = consumedGU / reportInterval;
+    		}
     	}else {
-    		// average data usage per hour in dataset
-    		dataRate = -1;
+    		dataRate = 700;
     	}
+    	
     	this.setPeriodicalDataUsage(dataRate);
     	
     	return dataRate;
