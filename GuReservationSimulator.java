@@ -475,7 +475,7 @@ public class GuReservationSimulator {
 //        defaultGU = input.nextDouble();
 //        System.out.println("");
     	
-    	defaultGU = 100000;
+    	defaultGU = 150000;
         
         // read default GU value from a txt file
         /*
