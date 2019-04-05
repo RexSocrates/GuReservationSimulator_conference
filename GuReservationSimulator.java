@@ -32,17 +32,14 @@ public class GuReservationSimulator {
     static double dataCollectionPeriods = 1;
     static int[] cellIDs;
     static String sampleIndexStr = "sample_";
-    static ArrayList<ExpResult> resultArr = new ArrayList<ExpResult>();
 
     
     public static void main(String[] args) throws FileNotFoundException {
-    	// print reservation scheme options
-        
     	getRandomSampleIndex();
-        System.out.print("Enter the number of devices : ");
-        int numOfDevices = input.nextInt();
-//        int numOfDevices = 7;
-        System.out.println("");
+//        System.out.print("Enter the number of devices : ");
+//        int numOfDevices = input.nextInt();
+        int numOfDevices = 7;
+//        System.out.println("");
         cellIDs = new int[numOfDevices];
 
         String[] reservationSchemes = {
@@ -50,16 +47,14 @@ public class GuReservationSimulator {
         		"Multiplicative scheme",
         		"Inventory-based Reservation Scheme"
         };
-        
-        for(int i = 0; i < reservationSchemes.length; i++) {
-        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-        }
-            
-        System.out.print("Choose the reservation scheme : ");
-        int option = input.nextInt();
-//        int option = 2;
-            
-        System.out.println("");
+        // print reservation scheme options
+//        for(int i = 0; i < reservationSchemes.length; i++) {
+//        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+//        }
+//            
+//        System.out.print("Choose the reservation scheme : ");
+//        int option = input.nextInt();
+        int option = 3;
             
         // configure the experiment
         double totalDataAllowance = dataAllowanceSetting(numOfDevices);
@@ -113,12 +108,12 @@ public class GuReservationSimulator {
         countTotalSignals(UeArr);
           
         // print experiment configuration
-        System.out.printf("Number of devices : %d\n", numOfDevices);
-        System.out.printf("Reservation scheme : %s\n", reservationSchemes[option - 1]);
-        System.out.printf("Monthly data allowance : %3.0f\n", totalDataAllowance);
-        System.out.printf("Remaining data allowance : %3.0f\n", OCS.getABMF().getRemainingDataAllowance());
-        System.out.println("Data collection period : " + dataCollectionPeriods);
-        System.out.printf("Default GU : %5.0f\n", defaultGU);
+//        System.out.printf("Number of devices : %d\n", numOfDevices);
+//        System.out.printf("Reservation scheme : %s\n", reservationSchemes[option - 1]);
+//        System.out.printf("Monthly data allowance : %3.0f\n", totalDataAllowance);
+//        System.out.printf("Remaining data allowance : %3.0f\n", OCS.getABMF().getRemainingDataAllowance());
+//        System.out.println("Data collection period : " + dataCollectionPeriods);
+//        System.out.printf("Default GU : %5.0f\n", defaultGU);
           
         writeExperimentResult(numOfDevices, reservationSchemes[option - 1], totalDataAllowance, defaultGU);
     }
@@ -201,30 +196,30 @@ public class GuReservationSimulator {
     	
     	if(option == 3) {
     		// enter some variable that IRS needs
-    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
-        	dataCollectionPeriods = input.nextDouble();
+//    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
+//        	dataCollectionPeriods = input.nextDouble();
         	
         	// read period length file
-    		/*
-        	String periodFileName = "periods.txt";
-        	File periodFile = new File(periodFileName);
-        	Scanner periodFileInput = new Scanner(periodFile);
+    		
+        	String cycleTimeFileName = "cycleTime.txt";
+        	File cycleTimeFile = new File(cycleTimeFileName);
+        	Scanner cycleTimeInput = new Scanner(cycleTimeFile);
         	
-        	dataCollectionPeriods = periodFileInput.nextDouble();
+        	dataCollectionPeriods = cycleTimeInput.nextDouble();
+        	cycleTimeInput.close();
         	
         	// write period file
-        	PrintWriter pw = new PrintWriter(periodFileName);
-        	double newPeriodLength = dataCollectionPeriods + 1;
-        	pw.print(newPeriodLength);
+        	PrintWriter pw = new PrintWriter(cycleTimeFileName);
+        	double newCycleTime = dataCollectionPeriods + 1;
+        	pw.print(newCycleTime);
         	pw.close();
-        	System.out.println("");
-        	*/
+        	
         	
         	
 //        	System.out.print("Enter report interval(hour) : ");
 //        	reportInterval = input.nextDouble();
         	reportInterval = dataCollectionPeriods;
-        	System.out.println("");
+//        	System.out.println("");
         	
         	Hashtable<String, double[]> dataRateAndTotalUsage = getPeriodicalDataUsageAndTotalUsage(numOfDevices, ueIDs);
         	
