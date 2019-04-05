@@ -39,10 +39,20 @@ public class GuReservationSimulator {
     	// print reservation scheme options
         
     	getRandomSampleIndex();
-        System.out.print("Enter the number of devices : ");
-        int numOfDevices = input.nextInt();
-//        int numOfDevices = 7;
-        System.out.println("");
+//        System.out.print("Enter the number of devices : ");
+//        int numOfDevices = input.nextInt();
+//        System.out.println("");
+    	
+    	File deviceFile = new File("numOfDevices.txt");
+    	Scanner deviceFileInput = new Scanner(deviceFile);
+    	int numOfDevices = deviceFileInput.nextInt();
+    	deviceFileInput.close();
+    	
+    	PrintWriter pw = new PrintWriter("numOfDevices.txt");
+    	int newDevicesNum = numOfDevices + 1;
+    	pw.print(newDevicesNum);
+    	pw.close();
+    	
         cellIDs = new int[numOfDevices];
 
         String[] reservationSchemes = {
@@ -51,15 +61,14 @@ public class GuReservationSimulator {
         		"Inventory-based Reservation Scheme"
         };
         
-        for(int i = 0; i < reservationSchemes.length; i++) {
-        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-        }
+//        for(int i = 0; i < reservationSchemes.length; i++) {
+//        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+//        }
+//        System.out.print("Choose the reservation scheme : ");
+//        int option = input.nextInt();
+        int option = 3;
             
-        System.out.print("Choose the reservation scheme : ");
-        int option = input.nextInt();
-//        int option = 2;
-            
-        System.out.println("");
+//        System.out.println("");
             
         // configure the experiment
         double totalDataAllowance = dataAllowanceSetting(numOfDevices);
@@ -201,8 +210,9 @@ public class GuReservationSimulator {
     	
     	if(option == 3) {
     		// enter some variable that IRS needs
-    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
-        	dataCollectionPeriods = input.nextDouble();
+//    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
+//        	dataCollectionPeriods = input.nextDouble();
+    		dataCollectionPeriods = 1;
         	
         	// read period length file
     		/*
