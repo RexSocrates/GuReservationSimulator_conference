@@ -39,10 +39,10 @@ public class GuReservationSimulator {
     	// print reservation scheme options
         
     	getRandomSampleIndex();
-        System.out.print("Enter the number of devices : ");
-        int numOfDevices = input.nextInt();
-//        int numOfDevices = 7;
-        System.out.println("");
+//        System.out.print("Enter the number of devices : ");
+//        int numOfDevices = input.nextInt();
+        int numOfDevices = 7;
+//        System.out.println("");
         cellIDs = new int[numOfDevices];
 
         String[] reservationSchemes = {
@@ -51,15 +51,15 @@ public class GuReservationSimulator {
         		"Inventory-based Reservation Scheme"
         };
         
-        for(int i = 0; i < reservationSchemes.length; i++) {
-        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-        }
+//        for(int i = 0; i < reservationSchemes.length; i++) {
+//        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+//        }
+//            
+//        System.out.print("Choose the reservation scheme : ");
+//        int option = input.nextInt();
+        int option = 2;
             
-        System.out.print("Choose the reservation scheme : ");
-        int option = input.nextInt();
-//        int option = 2;
-            
-        System.out.println("");
+//        System.out.println("");
             
         // configure the experiment
         double totalDataAllowance = dataAllowanceSetting(numOfDevices);
@@ -494,15 +494,32 @@ public class GuReservationSimulator {
         return OCS;
     }
 
-    private static OnlineChargingSystem multiplicativeScheme(double totalDataAllowance) {
+    private static OnlineChargingSystem multiplicativeScheme(double totalDataAllowance) throws FileNotFoundException {
     	// hyper-parameters
-        System.out.print("Enter default GU(MB) for multiplicative scheme : ");
-        defaultGU = input.nextDouble();
-        System.out.println("");
+//        System.out.print("Enter default GU(MB) for multiplicative scheme : ");
+//        defaultGU = input.nextDouble();
+//        System.out.println("");
         
-        System.out.print("Enter C : ");
-        double c = input.nextDouble();
-        System.out.println("");
+        double[] defaultGU_list = {10, 100, 1000, 10000, 100000, 150000};
+        
+        // default GU index file
+        File defaultGU_indexFile = new File("defaultGU_index.txt");
+        Scanner defaultGU_index_input = new Scanner(defaultGU_indexFile);
+        
+        int defaultGU_index = defaultGU_index_input.nextInt();
+        defaultGU_index_input.close();
+        
+        defaultGU = defaultGU_list[defaultGU_index];
+        
+        PrintWriter pw = new PrintWriter("defaultGU_index.txt");
+        pw.print(++defaultGU_index);
+        pw.close();
+        
+//        System.out.print("Enter C : ");
+//        double c = input.nextDouble();
+//        System.out.println("");
+        
+        double c = 1.0;
         
         // configure online charging function for multiplicative scheme
         OnlineChargingFunctionMultiplicativeScheme OCF = new OnlineChargingFunctionMultiplicativeScheme(defaultGU, c, chargingPeriods);
