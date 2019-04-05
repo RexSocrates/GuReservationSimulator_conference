@@ -39,10 +39,21 @@ public class GuReservationSimulator {
     	// print reservation scheme options
         
     	getRandomSampleIndex();
-        System.out.print("Enter the number of devices : ");
-        int numOfDevices = input.nextInt();
-//        int numOfDevices = 7;
-        System.out.println("");
+//        System.out.print("Enter the number of devices : ");
+//        int numOfDevices = input.nextInt();
+        
+        File deviceFile = new File("numOfDevices.txt");
+        Scanner deviceFileInput = new Scanner(deviceFile);
+        int numOfDevices = deviceFileInput.nextInt();
+        deviceFileInput.close();
+        
+        PrintWriter pw = new PrintWriter("numOfDevices.txt");
+        int newNumOfDevices = numOfDevices + 1;
+        pw.print(newNumOfDevices);
+        pw.close();
+        
+        
+//        System.out.println("");
         cellIDs = new int[numOfDevices];
 
         String[] reservationSchemes = {
@@ -51,15 +62,14 @@ public class GuReservationSimulator {
         		"Inventory-based Reservation Scheme"
         };
         
-        for(int i = 0; i < reservationSchemes.length; i++) {
-        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-        }
+//        for(int i = 0; i < reservationSchemes.length; i++) {
+//        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+//        }
+//        System.out.print("Choose the reservation scheme : ");
+//        int option = input.nextInt();
+        int option = 1;
             
-        System.out.print("Choose the reservation scheme : ");
-        int option = input.nextInt();
-//        int option = 2;
-            
-        System.out.println("");
+//        System.out.println("");
             
         // configure the experiment
         double totalDataAllowance = dataAllowanceSetting(numOfDevices);
@@ -461,9 +471,11 @@ public class GuReservationSimulator {
 	// configure the reservation schemes
     private static OnlineChargingSystem fixedScheme(double totalDataAllowance) throws FileNotFoundException{
     	// hyper-parameters
-        System.out.print("Enter the default GU(MB) for fixed scheme : ");
-        defaultGU = input.nextDouble();
-        System.out.println("");
+//        System.out.print("Enter the default GU(MB) for fixed scheme : ");
+//        defaultGU = input.nextDouble();
+//        System.out.println("");
+    	
+    	defaultGU = 100;
         
         // read default GU value from a txt file
         /*
