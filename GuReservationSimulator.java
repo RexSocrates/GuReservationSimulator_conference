@@ -36,69 +36,62 @@ public class GuReservationSimulator {
 
     
     public static void main(String[] args) throws FileNotFoundException {
-    	int experimentTimes = 1;
-//    	double[] interactionArr = new double[experimentTimes];
-//    	double[] signalsArr = new double[experimentTimes];
-//    	double[] successRateArr = new double[experimentTimes];
-    	
     	// print reservation scheme options
+        
+    	getRandomSampleIndex();
+        System.out.print("Enter the number of devices : ");
+        int numOfDevices = input.nextInt();
+//        int numOfDevices = 7;
+        System.out.println("");
+        cellIDs = new int[numOfDevices];
+
         String[] reservationSchemes = {
         		"Fixed scheme",
         		"Multiplicative scheme",
         		"Inventory-based Reservation Scheme"
         };
-    	
-    	for(int  expSerial = 0; expSerial < experimentTimes; expSerial++) {
-//    		System.out.println("Exp serial : " + expSerial);
-    		
-    		getRandomSampleIndex();
-            System.out.print("Enter the number of devices : ");
-            int numOfDevices = input.nextInt();
-//            int numOfDevices = 7;
-            System.out.println("");
-            cellIDs = new int[numOfDevices];
+        
+        for(int i = 0; i < reservationSchemes.length; i++) {
+        	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
+        }
             
-            for(int i = 0; i < reservationSchemes.length; i++) {
-            	System.out.printf("%2d . %s\n", i+1, reservationSchemes[i]);
-            }
+        System.out.print("Choose the reservation scheme : ");
+        int option = input.nextInt();
+//        int option = 2;
             
-            System.out.print("Choose the reservation scheme : ");
-            int option = input.nextInt();
-//            int option = 2;
+        System.out.println("");
             
-            System.out.println("");
+        // configure the experiment
+        double totalDataAllowance = dataAllowanceSetting(numOfDevices);
             
-            // configure the experiment
-            double totalDataAllowance = dataAllowanceSetting(numOfDevices);
+        switch(option) {
+            case 1 : OCS = fixedScheme(totalDataAllowance);
+                break;
+            case 2 : OCS = multiplicativeScheme(totalDataAllowance);
+                break;
+            case 3 : OCS = inventoryBasedReservationScheme(totalDataAllowance);
+            	break;
+        }
             
-            switch(option) {
-                case 1 : OCS = fixedScheme(totalDataAllowance);
-                    break;
-                case 2 : OCS = multiplicativeScheme(totalDataAllowance);
-                    break;
-                case 3 : OCS = inventoryBasedReservationScheme(totalDataAllowance);
-                	break;
-            }
+        // add the user equipments into the array
+        initializeUserEquipments(numOfDevices, option);
+        readTotalUsageFile();
             
-            // add the user equipments into the array
-            initializeUserEquipments(numOfDevices, option);
-            readTotalUsageFile();
-            
-         // stimulate that time is moving
-//          int deviceCount = 0;
-          double timePeriod = 0;
-          reportCurrentStatus(timePeriod++);
-//          int loopCount = 0;
+        // stimulate that time is moving
+//        int deviceCount = 0;
+        double timePeriod = 0;
+        reportCurrentStatus(timePeriod++);
+//        int loopCount = 0;
           
-          setTotalDemandAndDataRate();
+        setTotalDemandAndDataRate();
           
-          while(chargingProcessContinue(OCS.getRemainingDataAllowance(), timePeriod)) {
-          	if(timePeriod % reportInterval == 0) {
-          		reportCurrentStatus(timePeriod);
-          	}
+        while(chargingProcessContinue(OCS.getRemainingDataAllowance(), timePeriod)) {
+        	if(timePeriod % reportInterval == 0) {
+        		reportCurrentStatus(timePeriod);
+        	}
           	
-          	System.out.println("Time period : " + timePeriod);
-          	for(int i = 0; i < UeArr.size(); i++) {
+        	System.out.println("Time period : " + timePeriod);
+        	for(int i = 0; i < UeArr.size(); i++) {
           		UserEquipment ue = UeArr.get(i);
           		DailyUsage ueDailyUsage = ue.getDailyUsage();
           		int intTime = (new Double(timePeriod)).intValue();
@@ -111,25 +104,25 @@ public class GuReservationSimulator {
           		ue.completeSession(consumedGU, timePeriod);
           	}
               
-//              System.out.printf("Remaining data allowance : %10.2f\n", OCS.getRemainingDataAllowance());
+//        	System.out.printf("Remaining data allowance : %10.2f\n", OCS.getRemainingDataAllowance());
               
-              timePeriod += 1;
-          }
+        	timePeriod += 1;
+        }
           
-          // get total signals of this operation
-          countTotalSignals(UeArr);
+        // get total signals of this operation
+        countTotalSignals(UeArr);
           
-          // print experiment configuration
-          System.out.printf("Number of devices : %d\n", numOfDevices);
-          System.out.printf("Reservation scheme : %s\n", reservationSchemes[option - 1]);
-          System.out.printf("Monthly data allowance : %3.0f\n", totalDataAllowance);
-          System.out.printf("Remaining data allowance : %3.0f\n", OCS.getABMF().getRemainingDataAllowance());
-          System.out.println("Data collection period : " + dataCollectionPeriods);
-          System.out.printf("Default GU : %5.0f\n", defaultGU);
+        // print experiment configuration
+        System.out.printf("Number of devices : %d\n", numOfDevices);
+        System.out.printf("Reservation scheme : %s\n", reservationSchemes[option - 1]);
+        System.out.printf("Monthly data allowance : %3.0f\n", totalDataAllowance);
+        System.out.printf("Remaining data allowance : %3.0f\n", OCS.getABMF().getRemainingDataAllowance());
+        System.out.println("Data collection period : " + dataCollectionPeriods);
+        System.out.printf("Default GU : %5.0f\n", defaultGU);
           
-          writeExperimentResult(numOfDevices, reservationSchemes[option - 1], totalDataAllowance, defaultGU);
-    	}
+        writeExperimentResult(numOfDevices, reservationSchemes[option - 1], totalDataAllowance, defaultGU);
     }
+    
 
 	private static void getRandomSampleIndex() throws FileNotFoundException {
 		File sampleIndexFile = new File("sampleIndex.txt");
