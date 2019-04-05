@@ -212,7 +212,7 @@ public class GuReservationSimulator {
     		// enter some variable that IRS needs
 //    		System.out.print("Enter data collection periods(hour 1 ~ 168) : ");
 //        	dataCollectionPeriods = input.nextDouble();
-    		dataCollectionPeriods = 5;
+    		dataCollectionPeriods = 10;
         	
         	// read period length file
     		/*
